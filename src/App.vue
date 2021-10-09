@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <Test msg="Welcome to Your Vue.js App"/>
+    <SeatMap :map="layout" :groups="groups" />
   </div>
 </template>
 
 <script>
-import Test from './components/Test.vue';
+import SeatMap from './components/SeatMap.vue';
+import { layout, groups } from './assets/data';
 
 export default {
   name: 'App',
   components: {
-    Test,
+    SeatMap,
   },
+  data() {
+    return {
+      layout,
+      groups,
+    };
+  },
+
 };
 </script>
