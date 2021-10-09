@@ -7,6 +7,7 @@
       <Seat
         :number="seat.seat"
         :rank="seat.rank"
+        :ranks="ranks"
         :order="orders ? orderForSeat(seat.seat) : null"
       />
     </div>
@@ -25,6 +26,7 @@ export default {
     seats: Array,
     number: String,
     orders: Array,
+    ranks: Array,
   },
   methods: {
     // Returns the first findable order that is assigned to this seat.

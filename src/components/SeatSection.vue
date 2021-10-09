@@ -3,7 +3,12 @@
     <h1 class="text-center font-medium text-xl capitalize mb-2">{{ section.name }}</h1>
 
     <div v-for="row in section.rows" :key="row.row">
-      <SeatRow :number="row.row" :seats="row.seats" :orders="ordersForRow(row.row)" />
+      <SeatRow
+        :number="row.row"
+        :seats="row.seats"
+        :orders="ordersForRow(row.row)"
+        :ranks="ranks"
+      />
     </div>
   </div>
 </template>
@@ -20,6 +25,7 @@ export default {
   props: {
     section: Object,
     groups: Array,
+    ranks: Array,
   },
   computed: {
     // Because this is a computed value, the orders are

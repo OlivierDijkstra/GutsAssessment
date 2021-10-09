@@ -1,16 +1,18 @@
 <template>
-  <div class="mx-auto max-w-4xl p-8">
-    <div
-      v-for="section in map.sections"
-      :key="section.name"
-    >
-     <SeatSection :section="section" :groups="ordersForSection(section.name)" />
+  <div class="mx-auto max-w-4xl p-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
+    <SeatMapLegend :ranks="ranks" :groups="sectionedGroups" />
+
+    <div class="col-span-2">
+      <div v-for="section in map.sections" :key="section.name">
+        <SeatSection :section="section" :groups="ordersForSection(section.name)" :ranks="ranks" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import SeatSection from './SeatSection.vue';
+import SeatMapLegend from './SeatMapLegend/SeatMapLegend.vue';
 import { randomColor } from '../lib/helpers';
 
 // Groups orders together by their section. This will assist us
@@ -33,7 +35,10 @@ function groupGroupsToSection(groups) {
       // group id (phone number) and a random color
       // to the grouped section.
       grouped[section].push({
-        id: group.id, row, seat, color,
+        id: group.id,
+        row,
+        seat,
+        color,
       });
     });
   });
@@ -45,6 +50,7 @@ export default {
   name: 'SeatMap',
   components: {
     SeatSection,
+    SeatMapLegend,
   },
   props: {
     map: {
@@ -62,6 +68,12 @@ export default {
       }
 
       return [];
+    },
+    ranks() {
+      return this.map.ranks.map((rank) => ({
+        rank,
+        color: randomColor(),
+      }));
     },
   },
   methods: {
