@@ -57,7 +57,11 @@ export default {
     // Because this is a computed value, the orders are
     // only grouped once instead once for every section render.
     sectionedGroups() {
-      return groupGroupsToSection(this.groups);
+      if (this.groups) {
+        return groupGroupsToSection(this.groups);
+      }
+
+      return [];
     },
   },
   methods: {
