@@ -47,7 +47,10 @@ export default {
     SeatSection,
   },
   props: {
-    map: Object,
+    map: {
+      type: Object,
+      required: true,
+    },
     groups: Array,
   },
   computed: {
