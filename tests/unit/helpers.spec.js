@@ -1,7 +1,7 @@
 import { randomColor, groupBy } from '@/lib/helpers';
 
 test('randomColor() returns a random hex color code', () => {
-  const hexColorRegex = '^#(?:[0-9a-fA-F]{3}){1,2}$';
+  const hexColorRegex = '^#(?:[0-9a-fA-F]{1}){1,6}$';
 
   expect(randomColor()).toMatch(new RegExp(hexColorRegex));
 });
