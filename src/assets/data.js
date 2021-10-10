@@ -7,11 +7,11 @@ const layout = {
         {
           row: '1',
           seats: [
-            { seat: '3', rank: 'rank1' },
-            { seat: '5', rank: 'rank1' },
-            { seat: '6', rank: 'rank1' },
-            { seat: '4', rank: 'rank1' },
-            { seat: '2', rank: 'rank1' },
+            { seat: '3', rank: 'rank3' },
+            { seat: '5', rank: 'rank3' },
+            { seat: '6', rank: 'rank3' },
+            { seat: '4', rank: 'rank3' },
+            { seat: '2', rank: 'rank3' },
           ],
         },
         {
