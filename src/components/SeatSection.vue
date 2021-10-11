@@ -7,7 +7,6 @@
         :number="row.row"
         :seats="row.seats"
         :orders="ordersForRow(row.row)"
-        :ranks="ranks"
       />
     </div>
   </div>
@@ -25,7 +24,6 @@ export default {
   props: {
     section: Object,
     groups: Array,
-    ranks: Array,
   },
   computed: {
     // Because this is a computed value, the orders are

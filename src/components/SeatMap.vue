@@ -58,6 +58,13 @@ export default {
       required: true,
     },
     groups: Array,
+    colors: Object,
+  },
+  data() {
+    return {
+      ranks: [],
+      colorScheme: null,
+    };
   },
   computed: {
     // Because this is a computed value, the orders are
@@ -69,12 +76,16 @@ export default {
 
       return [];
     },
-    ranks() {
-      return this.map.ranks.map((rank) => ({
+
+  },
+  provide() {
+    return {
+      ranks: this.map.ranks.map((rank) => ({
         rank,
         color: randomColor(),
-      }));
-    },
+      })),
+      colorScheme: this.colors,
+    };
   },
   methods: {
     // Returns the orders from a section.

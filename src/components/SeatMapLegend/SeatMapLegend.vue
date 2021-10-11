@@ -22,8 +22,8 @@ export default {
   },
   props: {
     groups: Array,
-    ranks: Array,
   },
+  inject: ['ranks'],
   computed: {
     colorCodedGroups() {
       const groups = Object.values(this.groups).flat();

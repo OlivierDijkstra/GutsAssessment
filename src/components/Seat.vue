@@ -34,8 +34,8 @@ export default {
     number: String,
     rank: String,
     order: Object,
-    ranks: Array,
   },
+  inject: ['ranks'],
   computed: {
     backgroundColor() {
       return this.ranks.find((rank) => rank.rank === this.rank).color;

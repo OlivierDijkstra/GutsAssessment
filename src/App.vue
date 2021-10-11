@@ -1,12 +1,20 @@
 <template>
   <div id="app">
-    <SeatMap :map="layout" :groups="groups" />
+    <SeatMap :map="layout" :groups="groups" :colors="customColorScheme" />
   </div>
 </template>
 
 <script>
 import SeatMap from './components/SeatMap.vue';
 import { layout, groups } from './assets/data';
+
+const customColorScheme = {
+  ranks: {
+    rank1: '#262B37',
+    rank2: '#AFCBAD',
+    rank3: '#FBF8C2',
+  },
+};
 
 export default {
   name: 'App',
@@ -17,6 +25,7 @@ export default {
     return {
       layout,
       groups,
+      customColorScheme,
     };
   },
 
