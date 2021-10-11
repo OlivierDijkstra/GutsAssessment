@@ -14,6 +14,11 @@ const customColorScheme = {
     rank2: '#AFCBAD',
     rank3: '#FBF8C2',
   },
+  groups: {
+    '+31611111111': '#F1C440',
+    '+31622222222': '#BBC232',
+    '+31633333333': '#EE4646',
+  },
 };
 
 export default {

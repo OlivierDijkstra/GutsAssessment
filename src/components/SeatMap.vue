@@ -15,37 +15,6 @@ import SeatSection from './SeatSection.vue';
 import SeatMapLegend from './SeatMapLegend/SeatMapLegend.vue';
 import { randomColor } from '../lib/helpers';
 
-// Groups orders together by their section. This will assist us
-// rendering out the sections and passing the correct orders while
-// only having to do this once instead once for every render of a section.
-function groupGroupsToSection(groups) {
-  const grouped = [];
-
-  groups.forEach((group) => {
-    const color = randomColor();
-
-    group.seats.forEach(({ section, row, seat }) => {
-      // If the group section does not exist yet, create
-      // a new one with the key `section`.
-      if (!grouped[section]) {
-        grouped[section] = [];
-      }
-
-      // Push the row, seat together with the
-      // group id (phone number) and a random color
-      // to the grouped section.
-      grouped[section].push({
-        id: group.id,
-        row,
-        seat,
-        color,
-      });
-    });
-  });
-
-  return grouped;
-}
-
 export default {
   name: 'SeatMap',
   components: {
@@ -63,28 +32,67 @@ export default {
   data() {
     return {
       ranks: [],
-      colorScheme: null,
     };
   },
   computed: {
     // Because this is a computed value, the orders are
     // only grouped once instead once for every section render.
     sectionedGroups() {
-      if (this.groups) {
-        return groupGroupsToSection(this.groups);
+      // Groups orders together by their section. This will assist us
+      // rendering out the sections and passing the correct orders while
+      // only having to do this once instead once for every render of a section.
+      function groupGroupsToSection(groups, colors) {
+        const grouped = [];
+
+        groups.forEach((group) => {
+          // Check if a custom color is provider by the `colors` prop for this rank.
+          // If a color is given, we will use that instead of randomly generating one.
+          let color = null;
+
+          if (colors && colors.groups && colors.groups[group.id]) {
+            color = colors.groups[group.id];
+          }
+
+          group.seats.forEach(({ section, row, seat }) => {
+            // If the group section does not exist yet, create
+            // a new one with the key `section`.
+            if (!grouped[section]) {
+              grouped[section] = [];
+            }
+
+            // Push the row, seat together with the
+            // group id (phone number) and a random color
+            // to the grouped section.
+            grouped[section].push({
+              id: group.id,
+              row,
+              seat,
+              color: color || randomColor(),
+            });
+          });
+        });
+
+        return grouped;
       }
 
-      return [];
+      return this.groups ? groupGroupsToSection(this.groups, this.colors) : [];
     },
 
   },
   provide() {
     return {
-      ranks: this.map.ranks.map((rank) => ({
-        rank,
-        color: randomColor(),
-      })),
-      colorScheme: this.colors,
+      ranks: this.map.ranks.map((rank) => {
+        let color = null;
+
+        if (this.colors && this.colors.ranks && this.colors.ranks[rank]) {
+          color = this.colors.ranks[rank];
+        }
+
+        return {
+          rank,
+          color: color || randomColor(),
+        };
+      }),
     };
   },
   methods: {

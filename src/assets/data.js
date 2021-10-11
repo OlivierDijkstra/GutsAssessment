@@ -87,7 +87,6 @@ const groups = [
     id: '+31633333333',
     seats: [
       { section: '1st balcony', row: '2', seat: '2' },
-      { section: 'main hall', row: '3', seat: '2' },
     ],
   },
 ];
